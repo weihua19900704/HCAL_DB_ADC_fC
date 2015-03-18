@@ -56,19 +56,243 @@ void QIEChannels::ConvertQIEChannels( )
     media.rng = i%4;
     media.offset = offsets_[i];
     media.slope = slopes_[i];
-    QIEchannels.push_back(media);
+
+    if( det_ == "HB" )
+    {
+      HBQIEchannels.push_back(media);
+    }
+    else if( det_ == "HE" )
+    {
+      HEQIEchannels.push_back(media);
+    }
+    else if( det_ == "HF" )
+    {
+      HFQIEchannels.push_back(media);
+    }
+    else if( det_ == "HO" )
+    {
+      HOQIEchannels.push_back(media);
+    }
+    else
+    {
+      OtherQIEchannels.push_back(media);
+    }
   }
 }
 
 void QIEChannels::printQIEChannels( )
 {
   std::vector<oneQIEChannel>::iterator iter;
+   
+  for( iter = HBQIEchannels.begin() ; iter != HBQIEchannels.end() ; iter++)
+  {
+    std::cout << (*iter).eta << ","<< (*iter).phi << "," << (*iter).dep << ","<< (*iter).det << ","<< (*iter).cap << ","<< (*iter).rng << ","<< (*iter).offset << ","<< (*iter).slope << std::endl;
+  }
 
-  for( iter = QIEchannels.begin() ; iter != QIEchannels.end() ; iter++)
+  for( iter = HEQIEchannels.begin() ; iter != HEQIEchannels.end() ; iter++)
+  {
+    std::cout << (*iter).eta << ","<< (*iter).phi << "," << (*iter).dep << ","<< (*iter).det << ","<< (*iter).cap << ","<< (*iter).rng << ","<< (*iter).offset << ","<< (*iter).slope << std::endl;
+  }
+
+  for( iter = HFQIEchannels.begin() ; iter != HFQIEchannels.end() ; iter++)
+  {
+    std::cout << (*iter).eta << ","<< (*iter).phi << "," << (*iter).dep << ","<< (*iter).det << ","<< (*iter).cap << ","<< (*iter).rng << ","<< (*iter).offset << ","<< (*iter).slope << std::endl;
+  }
+
+  for( iter = HOQIEchannels.begin() ; iter != HOQIEchannels.end() ; iter++)
+  {
+    std::cout << (*iter).eta << ","<< (*iter).phi << "," << (*iter).dep << ","<< (*iter).det << ","<< (*iter).cap << ","<< (*iter).rng << ","<< (*iter).offset << ","<< (*iter).slope << std::endl;
+  }
+  
+  for( iter = OtherQIEchannels.begin() ; iter != OtherQIEchannels.end() ; iter++)
   {
     std::cout << (*iter).eta << ","<< (*iter).phi << "," << (*iter).dep << ","<< (*iter).det << ","<< (*iter).cap << ","<< (*iter).rng << ","<< (*iter).offset << ","<< (*iter).slope << std::endl;
   }
 }
+
+double QIEChannels::getoffset(
+                              int eta,
+                              int phi,
+                              int dep,
+                              std::string det,
+                              int cap,
+                              int rng
+                             )
+{
+  std::vector<oneQIEChannel>::iterator iter;
+  bool isthischannel = false;
+
+  if( det == "HB" )
+  {
+    for( iter = HBQIEchannels.begin() ; iter != HBQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).offset;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HB!" << std::endl;
+      return -1000;
+    }
+  }
+  else if( det == "HE" )
+  {
+    for( iter = HEQIEchannels.begin() ; iter != HEQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).offset;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HE!" << std::endl;
+      return -1000;
+    }
+  }
+  else if( det == "HF" )
+  {
+    for( iter = HFQIEchannels.begin() ; iter != HFQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).offset;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HF!" << std::endl;
+      return -1000;
+    }
+  }
+  else if( det == "HO" )
+  {
+    for( iter = HOQIEchannels.begin() ; iter != HOQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).offset;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HO!" << std::endl;
+      return -1000;
+    }
+  }
+  else
+  {
+    std::cout << "Wrong subdetector, please use HB, HE, HF or HO!" << std::endl;
+    return -1000;
+  }
+}
+
+double QIEChannels::getslope(
+                              int eta,
+                              int phi,
+                              int dep,
+                              std::string det,
+                              int cap,
+                              int rng
+                             )
+{
+  std::vector<oneQIEChannel>::iterator iter;
+  bool isthischannel = false;
+
+  if( det == "HB" )
+  {
+    for( iter = HBQIEchannels.begin() ; iter != HBQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).slope;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HB!" << std::endl;
+      return -1000;
+    }
+  }
+  else if( det == "HE" )
+  {
+    for( iter = HEQIEchannels.begin() ; iter != HEQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).slope;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HE!" << std::endl;
+      return -1000;
+    }
+  }
+  else if( det == "HF" )
+  {
+    for( iter = HFQIEchannels.begin() ; iter != HFQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).slope;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HF!" << std::endl;
+      return -1000;
+    }
+  }
+  else if( det == "HO" )
+  {
+    for( iter = HOQIEchannels.begin() ; iter != HOQIEchannels.end() ; iter++)
+    {
+      isthischannel = ((*iter).eta == eta) && ((*iter).phi == phi) && ((*iter).dep == dep) && ((*iter).cap == cap) && ((*iter).rng == rng);
+      if( isthischannel )
+      {
+        return (*iter).slope;
+      }
+      else
+        continue;
+    }
+    if ( !isthischannel )
+    {
+      std::cout << "No this channel in HO!" << std::endl;
+      return -1000;
+    }
+  }
+  else
+  {
+    std::cout << "Wrong subdetector, please use HB, HE, HF or HO!" << std::endl;
+    return -1000;
+  }
+}
+
+
 
 // namepspace tools
 void tools::split ( const std::string & content,

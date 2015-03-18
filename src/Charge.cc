@@ -1,22 +1,11 @@
 #include "../interface/Charge.h"
 
 void Charge::getQIEChannel(
-                           int eta,
-                           int phi,
-                           int dep,
-                           std::string det,
-                           int cap,
                            int rng,
                            double offset,
                            double slope
                           )
 {
-
-  eta_ = eta;
-  phi_ = phi;
-  dep_ = dep;
-  det_ = det;
-  cap_ = cap;
   rng_ = rng;
   offset_ = offset;
   slope_ = slope;

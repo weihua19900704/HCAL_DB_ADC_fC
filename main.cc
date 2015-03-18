@@ -14,28 +14,32 @@ int main()
   myQIEChannels_old.buildQIEChannels( qiechannels_old );
   myQIEChannels_new.buildQIEChannels( qiechannels_new );
 
+  double testslope = myQIEChannels_new.getslope(
+                                                  -1,
+                                                  1,
+                                                  1,
+                                                  "HB",
+                                                  0,
+                                                  3
+                                                 );
+  std::cout << testslope << std::endl;
+
   //test QIEChannels class
   //myQIEChannels_old.printQIEChannels();
   //myQIEChannels_new.printQIEChannels();
 
   Charge myCharge;
+  int chargenumber = 0;
 
   //test Charge Class
-  myCharge.getQIEChannel(
-                         1,
-                         1,
-                         1,
-                         "HB",
-                         0,
-                         3,
-                         0.1624,
-                         0.9278
-                        );
+  //myCharge.getQIEChannel(
+  //                       3,
+  //                       0.1624,
+  //                       0.9278
+  //                      );
   
-  double testcharge = myCharge.ChargeCalculator(31);
- 
-
-  std::cout << testcharge << std::endl;
+  //double testcharge = myCharge.ChargeCalculator(chargenumber);
+  //std::cout << testcharge << std::endl;
 
   return 0;
 }

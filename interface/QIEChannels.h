@@ -4,21 +4,21 @@
 #include <fstream>
 #include <cstring>
 
+struct oneQIEChannel
+{
+  int eta;
+  int phi;
+  int dep;
+  std::string det;
+  int cap;
+  int rng;
+  double offset;
+  double slope;
+};
+
 class QIEChannels
 {
  private:
-  struct oneQIEChannel
-  {
-    int eta;
-    int phi;
-    int dep;
-    std::string det;
-    int cap;
-    int rng;
-    double offset;
-    double slope;
-  };
-
   int eta_;
   int phi_;
   int dep_;
@@ -29,10 +29,31 @@ class QIEChannels
   void ConvertQIEChannels( );
 
  public:
-  std::vector<oneQIEChannel> QIEchannels;
+  std::vector<oneQIEChannel> HBQIEchannels;
+  std::vector<oneQIEChannel> HEQIEchannels;
+  std::vector<oneQIEChannel> HFQIEchannels;
+  std::vector<oneQIEChannel> HOQIEchannels;
+  std::vector<oneQIEChannel> OtherQIEchannels;
+
   void buildQIEChannels( std::ifstream& qietable );
   void printQIEChannels( );
 
+  double getoffset(
+                   int eta,
+                   int phi,
+                   int dep,
+                   std::string det,
+                   int cap,
+                   int rng
+                  );
+  double getslope(
+                  int eta,
+                  int phi,
+                  int dep,
+                  std::string det,
+                  int cap,
+                  int rng
+                 );
 };
 
 namespace tools
@@ -41,6 +62,7 @@ namespace tools
   void split ( const std::string & content,
                std::vector<std::string> & output,
                const char & delimiter );
+
 };
 
 

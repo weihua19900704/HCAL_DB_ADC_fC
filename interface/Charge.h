@@ -6,11 +6,6 @@ class Charge
 {
  public:
   void getQIEChannel(
-                     int eta,
-                     int phi,
-                     int dep,
-                     std::string det,
-                     int cap,
                      int rng,
                      double offset,
                      double slope
@@ -21,8 +16,7 @@ class Charge
                          );
 
  private: 
-  int eta_ , phi_ , dep_ , cap_ , rng_;
-  std::string det_;
+  int rng_;
   double offset_ , slope_;
 
   int chargenumbertoADC(
