@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "interface/QIEChannels.h"
+#include "interface/Charge.h"
 
 int main()
 {
@@ -13,11 +14,28 @@ int main()
   myQIEChannels_old.buildQIEChannels( qiechannels_old );
   myQIEChannels_new.buildQIEChannels( qiechannels_new );
 
-  //test
-  myQIEChannels_old.printQIEChannels();
-  myQIEChannels_new.printQIEChannels();
+  //test QIEChannels class
+  //myQIEChannels_old.printQIEChannels();
+  //myQIEChannels_new.printQIEChannels();
 
-  std::cout << " " << std::endl;
+  Charge myCharge;
+
+  //test Charge Class
+  myCharge.getQIEChannel(
+                         1,
+                         1,
+                         1,
+                         "HB",
+                         0,
+                         3,
+                         0.1624,
+                         0.9278
+                        );
+  
+  double testcharge = myCharge.ChargeCalculator(31);
+ 
+
+  std::cout << testcharge << std::endl;
 
   return 0;
 }

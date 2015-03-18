@@ -3,7 +3,7 @@ INC=-I ./interface/
 FLAG=-std=c++11
 LIB=
 SRC=./src
-OBJ=$(SRC)/QIEChannels.o
+OBJ=$(SRC)/QIEChannels.o $(SRC)/Charge.o
 EXE=main
 
 default: $(EXE)

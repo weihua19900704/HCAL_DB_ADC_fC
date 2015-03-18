@@ -20,6 +20,7 @@ void QIEChannels::buildQIEChannels( std::ifstream& qietable )
       tools::split( line , entries, ' ');
       
       //std::cout << entries[1] << std::endl; 
+      //tricky part here, delete the first element in the vector because we get a space at the first of each line so the first element in the vector is empty, which will destroy the stod and stoi function
       entries.erase ( entries.begin() );
 
       eta_ = std::stoi( entries[0] );
@@ -32,15 +33,6 @@ void QIEChannels::buildQIEChannels( std::ifstream& qietable )
         offsets_[i] = std::stod( entries[4+i] );
         slopes_[i] = std::stod( entries[4+16+i] );
       }
-
-      //char *tmp = new char[line.length() + 1];
-      //strcpy( tmp , line.c_str() );
-      //char det_char[5];
-
-      //sscanf( tmp , "%i %i %i %s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f", &eta_ , &phi_ , &dep_ , det_char , &offsets_[0] , &offsets_[1] ,  &offsets_[2] , &offsets_[3] , &offsets_[4] , &offsets_[5] , &offsets_[6] , &offsets_[7] , &offsets_[8] , &offsets_[9] , &offsets_[10] , &offsets_[11] , &offsets_[12] , &offsets_[13] , &offsets_[14] , &offsets_[15] , &slopes_[0] , &slopes_[1] ,  &slopes_[2] , &slopes_[3] , &slopes_[4] , &slopes_[5] , &slopes_[6] , &slopes_[7] , &slopes_[8] , &slopes_[9] , &slopes_[10] , &slopes_[11] , &slopes_[12] , &slopes_[13] , &slopes_[14] , &slopes_[15] );
- 
-      //det_.append( det_char );
-      //delete [] tmp;
 
       ConvertQIEChannels( );  
       det_.clear();

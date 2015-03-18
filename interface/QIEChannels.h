@@ -15,8 +15,8 @@ class QIEChannels
     std::string det;
     int cap;
     int rng;
-    double slope;
     double offset;
+    double slope;
   };
 
   int eta_;
