@@ -1,6 +1,6 @@
 CC=g++
 INC=-I ./interface/
-CFLAGS=-c -g -Wall `root-config --cflags`
+CFLAGS=-c -g -std=c++0x -Wall `root-config --cflags`
 FLAG=-std=c++11
 FLAG+=`root-config --glibs`
 LIB=

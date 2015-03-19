@@ -199,6 +199,7 @@ double QIEChannels::getoffset(
     std::cout << "Wrong subdetector, please use HB, HE, HF or HO!" << std::endl;
     return -1000;
   }
+  return -1000;
 }
 
 double QIEChannels::getslope(
@@ -290,6 +291,7 @@ double QIEChannels::getslope(
     std::cout << "Wrong subdetector, please use HB, HE, HF or HO!" << std::endl;
     return -1000;
   }
+  return -1000;
 }
 
 
